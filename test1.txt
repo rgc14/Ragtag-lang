@@ -1,0 +1,12 @@
+int a = 5
+str b = "dog"
+flt c = 3.4
+int d = 9
+
+
+     
+
+print a
+print b
+print c
+print d
