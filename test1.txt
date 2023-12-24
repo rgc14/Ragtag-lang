@@ -1,12 +1,24 @@
 int a = 5
-str b = "dog"
-flt c = 3.4
-int d = 9
+int b = 3
+int c = 17
+
+int d
+int e
+
+d = 24
+int f = 21
+e = 6
+f = -12
 
 
-     
+flt g = 5.2
+flt h = 3.6
+flt i = 17.1
 
-print a
-print b
-print c
-print d
+flt j
+flt k
+
+j = 24.24
+flt l = 21.45
+k = 6.1
+l = -12.0

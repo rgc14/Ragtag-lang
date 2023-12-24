@@ -1,0 +1,109 @@
+int int_assign(vector<string> iline, vector<struct int_> & ilist, unordered_map<string, int> & ivars){
+	//deals with instanitaion, initilization and assignmnet of ints
+	if (iline.size() == 2){
+		//int a
+		unordered_map<string, int>::iterator it = ivars.find(iline[1]);
+		if (it == ivars.end()){
+			ivars[iline[1]] = 0;
+			
+			int_ new_int;
+			new_int.name = iline[1];
+			new_int.val = 0;
+			ilist.push_back(new_int);
+		}else{
+			cout<<"error"<<endl;
+			return 1;
+		}
+	}else if (iline.size() == 3){
+		//a = 3
+		int ival = 0;
+		try {
+			ival = stoi(iline[2]);
+		}catch (const exception & e){
+			cout<<"error"<<endl;
+			return 1;
+		}
+		
+		ivars[iline[0]] = 0;
+		
+		for (int i = 0; i < ilist.size(); i++){
+			if (ilist[i].name == iline[0]){
+				ilist[i].val = ival;
+				break;
+			}
+		}
+	}else if (iline.size() == 4){
+		//int a = 3
+		int ival = 0;
+		try {
+			ival = stoi(iline[3]);
+		}catch (const exception & e){
+			cout<<"error"<<endl;
+			return 1;
+		}
+		
+		ivars[iline[1]] = 0;
+		
+		int_ new_int;
+		new_int.name = iline[1];
+		new_int.val = ival;
+		ilist.push_back(new_int);
+	}
+	return 0;
+	
+}
+
+int flt_assign(vector<string> iline, vector<struct flt> & ilist, unordered_map<string, int> & ivars){
+	//deals with instanitaion, initilization and assignmnet of flts
+	if (iline.size() == 2){
+		//flt a
+		unordered_map<string, int>::iterator it = ivars.find(iline[1]);
+		if (it == ivars.end()){
+			ivars[iline[1]] = 1;
+			
+			flt new_flt;
+			new_flt.name = iline[1];
+			new_flt.val = 0.0;
+			ilist.push_back(new_flt);
+		}else{
+			cout<<"error"<<endl;
+			return 1;
+		}
+	}else if (iline.size() == 3){
+		//a = 3.3
+		double ival = 0.0;
+		try {
+			ival = stod(iline[2]);
+		}catch (const exception & e){
+			cout<<"error"<<endl;
+			return 1;
+		}
+		
+		ivars[iline[0]] = 1;
+		
+		for (int i = 0; i < ilist.size(); i++){
+			if (ilist[i].name == iline[0]){
+				ilist[i].val = ival;
+				break;
+			}
+		}
+	}else if (iline.size() == 4){
+		//int a = 3
+		double ival = 0.0;
+		try {
+			ival = stod(iline[3]);
+		}catch (const exception & e){
+			cout<<"error"<<endl;
+			return 1;
+		}
+		
+		ivars[iline[1]] = 1;
+		
+		flt new_flt;
+		new_flt.name = iline[1];
+		new_flt.val = ival;
+		ilist.push_back(new_flt);
+	}
+	return 0;
+	
+}

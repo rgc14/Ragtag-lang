@@ -1,0 +1,26 @@
+my own personal notes
+
+int, flt, str, if-else, loops, arrays (or whatever version of arrays I use), write (files and console), read (files and console), pow, sqrt, cbrt are to be in the main module, create a template for arrays
+
+focus on int, flt, read, write now
+
+for printing will have 2 "modes", console and files
+
+write mode 1
+write a
+
+prints value of a to console
+
+output-file "out.txt"
+write mode 2 "w"
+write a
+
+prints value of a to "out.txt" in write mode, use "a" for append
+
+default is mode 1
+
+if not initilized int will be set to 0, flt to 0.0 and str to "", no error message will be provided
+
+no order of operations, goes straight right to left, no parenthesis/brackets
+
+vars cannot start with number

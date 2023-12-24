@@ -1,4 +1,4 @@
 int
 flt
-str
-print
+write
+read
