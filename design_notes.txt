@@ -24,3 +24,9 @@ if not initilized int will be set to 0, flt to 0.0 and str to "", no error messa
 no order of operations, goes straight right to left, no parenthesis/brackets
 
 vars cannot start with number
+
+spaces needed in between each operater, for example
+
+int prod=3*4 will not work
+
+int prod = 3 * 4 will work

@@ -31,6 +31,15 @@ struct str{
 	string val;
 };
 
+int get_value(string iname, vector<struct int_> & ilist){
+	for (int i = 0; i < ilist.size(); i++){
+		if (ilist[i].name == iname){
+			return ilist[i].val;
+		}
+	}
+	return 0;
+}
+
 int int_init(vector<string> iline, vector<struct int_> & ilist, unordered_map<string, int> & ivars){
 
 	string var_name = iline[1];
@@ -50,31 +59,74 @@ int int_init(vector<string> iline, vector<struct int_> & ilist, unordered_map<st
 		}
 		string val;
 		int final;
+		int first = 0;
 		int prev_op = 0;//0 is na, 1 if add, 2 if minus, 3 if multiple, 4 if divide, 5 if mod
+
 		for (int i = 0; i < exp.size(); i+=2){
-			if (prev_op == 0){
+			if (first == 0){
+				val = exp[i];
+				if (isdigit(val[0]) == 1){//if it's a number
+					final = stoi(val);
+				}else{//if it's a variable
+					final = get_value(val, ilist);
+				}
+				first = 1;
+				continue;
+			}
+
+			if (exp[i-1] == "+"){
+				prev_op = 1;
+			}else if (exp[i-1] == "-"){
+				prev_op = 2;
+			}else if (exp[i-1] == "*"){
+				prev_op = 3;
+			}else if (exp[i-1] == "/"){
+				prev_op = 4;
+			}else if (exp[i-1] == "%"){
+				prev_op = 5;
+			}
+			if (prev_op==1){
 				val = exp[i];
 				if (isdigit(val[0]) == 1){
-					final = stoi(exp[i]);
+					final += stoi(val);
 				}else{
-					//implement func for this
+					final += get_value(val, ilist);
 				}
-				break;
-			}else{
-				if (exp[i-1] == "+"){
-					prev_op = 1;
-				}else if (exp[i-1] == "-"){
-					prev_op = 2;
-				}else if (exp[i-1] == "*"){
-					prev_op = 3;
-				}else if (exp[i-1] == "+"){
-					prev_op = 4;
-				}else if (exp[i-1] == "+"){
-					prev_op = 5;
+			}else if (prev_op==2){
+				val = exp[i];
+				if (isdigit(val[0]) == 1){
+					final -= stoi(val);
+				}else{
+					final -= get_value(val, ilist);					
 				}
-				//implement this here
+			}else if (prev_op==3){
+				val = exp[i];
+				if (isdigit(val[0]) == 1){
+					final *= stoi(val);
+				}else{
+					final *= get_value(val, ilist);
+				}
+			}else if (prev_op==4){
+				val = exp[i];
+				if (isdigit(val[0]) == 1){
+					final /= stoi(val);
+				}else{
+					final /= get_value(val, ilist);
+				}
+			}else if (prev_op==5){
+				val = exp[i];
+				if (isdigit(val[0]) == 1){
+					final %= stoi(val);
+				}else{
+					final %= get_value(val, ilist);
+				}
 			}
 		}
+		int_ new_int;
+		new_int.name = var_name;
+		new_int.val = final;
+		ilist.push_back(new_int);
+		ivars[var_name] = 0;
 	}
 
 	return 0;
@@ -187,11 +239,11 @@ int main(int argc, char* argv[]){
 		cout<<endl;
 	}
 	
-	for (int i = 0; i < flt_list.size(); ++i){
+	/*for (int i = 0; i < flt_list.size(); ++i){
 		cout<<flt_list[i].name<<endl;
 		cout<<flt_list[i].val<<endl;
 		cout<<endl;
-	}
+	}*/
     
     for (const auto& pair : vars) {
         std::cout << "Key: " << pair.first << ", Value: " << pair.second << std::endl;
